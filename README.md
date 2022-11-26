@@ -1,34 +1,43 @@
 ![](../../workflows/gds/badge.svg) ![](../../workflows/docs/badge.svg)
 
-# What is Tiny Tapeout?
+# 1bit ALU
 
-TinyTapeout is an educational project that aims to make it easier and cheaper than ever to get your digital designs manufactured on a real chip!
+Link to the Wokwi project: [tiny-tapeout-1bit-alu](https://wokwi.com/projects/340318610245288530)
 
-Go to https://tinytapeout.com for instructions!
+This design is based on the 1bit ALU from `Structured Computer Organization: Andrew S. Tanenbaum`.
 
-## How to change the Wokwi project
+![1bit ALU](./img/1bit-alu.png)
 
-Edit the [info.yaml](info.yaml) and change the wokwi_id to match your project.
+## Pin list
 
-## How to enable the GitHub actions to build the ASIC files
+| Pin | Function |
+|---|------|
+| 1 | CIN  |
+| 2 | INVA |
+| 3 | A    |
+| 4 | ENA  |
+| 5 | B    |
+| 6 | ENB  |
+| 7 | F0   |
+| 8 | F1   |
 
-Please see the instructions for:
+## Functions
 
-* [Enabling GitHub Actions](https://tinytapeout.com/faq/#when-i-commit-my-change-the-gds-action-isnt-running)
-* [Enabling GitHub Pages](https://tinytapeout.com/faq/#my-github-action-is-failing-on-the-pages-part)
+The following functions are supported:
 
-## How does it work?
+| F1 | F0 | Operation |
+|----|----|---------|
+| 0  | 0  | A AND B |
+| 0  | 1  | NOT B   |
+| 1  | 0  | A OR B  |
+| 1  | 1  | ADD     |
 
-When you edit the info.yaml to choose a different ID, the [GitHub Action](.github/workflows/gds.yaml) will fetch the digital netlist of your design from Wokwi.
+`ENA` and `ENB` enable/disable the respective input.
+`INVA` inverts A before applying the operation.
+`CIN` is used as input for the full adder.
 
-After that, the action uses the open source ASIC tool called [OpenLane](https://www.zerotoasiccourse.com/terminology/openlane/) to build the files needed to fabricate an ASIC.
+## Results
 
-## Resources
+The 7-segment display shows either a "0" or a "1" depending on the output.
+If the ADD operation is selected, the dot of the 7-segment display represents the COUT.
 
-* [FAQ](https://tinytapeout.com/faq/)
-* [Digital design lessons](https://tinytapeout.com/digital_design/)
-* [Join the community](https://discord.gg/rPK2nSjxy8)
-
-## What next?
-
-* Share your GDS on Twitter, tag it [#tinytapeout](https://twitter.com/hashtag/tinytapeout?src=hashtag_click) and [link me](https://twitter.com/matthewvenn)!
